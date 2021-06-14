@@ -12,6 +12,13 @@ const PORT = process.env.PORT || 3000
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main', extname: '.hbs', helpers: {
+    addAmount: function (simpleArr) {
+      let amount = 0
+      simpleArr.forEach(element => {
+        amount += element.amount
+      });
+      return amount
+    },
     isCategorySelected: function (item, category) {
       if (item === category) return "selected"
     },
