@@ -30,8 +30,10 @@ router.post('/', async (req, res) => {
 })
 //新增一筆支出
 
-router.delete('/:id', (req, res) => {
-
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params
+  await Record.findOneAndDelete({ "_id": id })
+  return res.redirect('/')
 })
 
 
