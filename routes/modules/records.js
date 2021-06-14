@@ -2,7 +2,21 @@ const express = require('express')
 const router = express.Router()
 
 const Record = require('../../models/Record')
+const Category = require('../../models/Category')
 
+//篩選類別
+router.get('/category', async (req, res) => {
+  const { category } = req.query
+  const filteredByCategory = await Record.find({ category }).lean()
+  const categoryArr = await Category.find().lean()
+
+  let errorMessage = ''
+  if (!filteredByCategory.length) {
+    errorMessage = `<div class="alert alert-primary" role="alert">沒有相關支出!</div>`
+  }
+  return res.render('index', { recordsArr: filteredByCategory, categoryArr, errorMessage, item: category })
+})
+//篩選類別
 
 router.get('/new', (req, res) => {
   return res.render('new')
@@ -35,7 +49,5 @@ router.delete('/:id', async (req, res) => {
   await Record.findOneAndDelete({ "_id": id })
   return res.redirect('/')
 })
-
-
 
 module.exports = router

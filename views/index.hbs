@@ -6,12 +6,29 @@
         <div class="form-group">
           <label for="category">類別</label>
           <select name="category"
-                  id="category">
-            <option value="living">家居物業</option>
-            <option value="transport">交通出行</option>
-            <option value="entertainment">休閒娛樂</option>
-            <option value="food">餐飲食品</option>
-            <option value="other">其他</option>
+                  id="category"
+                  onchange="this.form.submit()">
+            <option value="">篩選</option>
+            <option value="1"
+                    {{isCategorySelected
+                    item "1"
+                    }}>家居物業</option>
+            <option value="2"
+                    {{isCategorySelected
+                    item "2"
+                    }}>交通出行</option>
+            <option value="3"
+                    {{isCategorySelected
+                    item "3"
+                    }}>休閒娛樂</option>
+            <option value="4"
+                    {{isCategorySelected
+                    item "4"
+                    }}>餐飲食品</option>
+            <option value="5"
+                    {{isCategorySelected
+                    item "5"
+                    }}>其他</option>
           </select>
         </div>
       </form>
@@ -44,7 +61,7 @@
           </h5>
         </div>
         <div class="col-auto">
-          <a class="btn btn-success"
+          <a class="btn btn-warning"
              href="/records/{{this._id}}/edit">修改</a>
           <form action="/records/{{this._id}}?_method=DELETE"
                 method="POST"
@@ -56,8 +73,13 @@
       </div>
     </li>
     {{/each}}
+    {{#if errorMessage}}
     <li class="list-group-item text-center">
-      <a class="btn btn-warning"
+      {{{errorMessage}}}
+    </li>
+    {{/if}}
+    <li class="list-group-item text-center">
+      <a class="btn btn-success"
          href="/records/new">
         <h1 class="text-center">新增支出</h1>
       </a>
