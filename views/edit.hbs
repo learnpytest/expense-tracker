@@ -1,0 +1,92 @@
+<h3 class="text-center my-4">請修改你的支出</h3>
+<div class="container my-3">
+  <div class="row">
+    <div class="col-10 col-lg-6 col-sm-8 mx-auto">
+      <form action="/records/{{record._id}}?_method=PUT"
+            method="POST"
+            class="was-validated pl-5">
+        <div class="form-group form-inline">
+          <label for="name"
+                 class="mr-5">名稱*</label>
+          <input type="text"
+                 class="form-control"
+                 id="name"
+                 name="name"
+                 placeholder="name"
+                 value="{{record.name}}"
+                 required>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group form-inline">
+          <label for="date"
+                 class="mr-5">日期*</label>
+          <input type="date"
+                 name="date"
+                 class="form-control"
+                 value="{{getCalendarDate record.date}}"
+                 required>
+        </div>
+        <div class="form-group form-inline">
+          <label for="category"
+                 class="mr-5">類別*</label>
+          <select id="category"
+                  class="form-control"
+                  name="category"
+                  required>
+            <option value="1"
+                    {{isCategorySelected
+                    record.category "1"
+                    }}>家居物業</option>
+            <option value="2"
+                    {{isCategorySelected
+                    record.category "2"
+                    }}>交通出行</option>
+            <option value="3"
+                    {{isCategorySelected
+                    record.category "3"
+                    }}>休閒娛樂</option>
+            <option value="4"
+                    {{isCategorySelected
+                    record.category "4"
+                    }}>餐飲食品</option>
+            <option value="5"
+                    {{isCategorySelected
+                    record.category "5"
+                    }}>其他</option>
+          </select>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group form-inline">
+          <label for="amount"
+                 class="mr-5">金額*</label>
+          <input type="number"
+                 class="form-control"
+                 id="amount"
+                 name="amount"
+                 placeholder="請輸入花費金額 ..."
+                 value="{{record.amount}}"
+                 required>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group form-inline">
+          <label for="footnote"
+                 class="mr-5">備註</label>
+          <textarea type="text"
+                    class="form-control"
+                    id="footnote"
+                    name="footnote"
+                    placeholder="備註 ..."
+                    rows="3">{{record.footnote}}</textarea>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="edit-form-submit-button text-center w-100">
+          <button class="btn btn-lg btn-primary">修改</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

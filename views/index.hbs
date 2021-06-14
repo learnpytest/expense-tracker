@@ -25,7 +25,7 @@
     {{#each recordsArr}}
     <li class="list-group-item">
       <div class="row">
-        <div class="col-auto mr-auto">
+        <div class="col-3 mr-auto">
           <h2 style="display: inline; vertical-align:middle;">
             <i class="{{getCategoryElement
             ../categoryArr
@@ -34,11 +34,11 @@
           </h2>
           <h4 style="display: inline; vertical-align: middle;">
             {{this.name}}
-            <p class="text-muted text-right mr-1"
-               style="font-size:8px;">{{this.date}}</p>
+            <p class="text-muted text-left mr-1"
+               style="font-size:8px;">{{getCalendarDate this.date}}</p>
           </h4>
         </div>
-        <div class="col-auto mr-auto">
+        <div class="col-3 mr-auto">
           <h5 style="display: inline; vertical-align: middle;">
             {{this.amount}}
           </h5>
