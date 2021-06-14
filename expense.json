@@ -2,7 +2,6 @@
   "results": {
     "record": [
       {
-        "id": "1",
         "name": "午餐",
         "category": "4",
         "date": "2021-1-1",
@@ -11,7 +10,6 @@
         "ownerID": ""
       },
       {
-        "id": "2",
         "name": "晚餐",
         "category": "4",
         "date": "2021-1-2",
@@ -20,7 +18,6 @@
         "ownerID": ""
       },
       {
-        "id": "3",
         "name": "捷運",
         "category": "2",
         "date": "2021-1-3",
@@ -29,7 +26,6 @@
         "ownerID": ""
       },
       {
-        "id": "4",
         "name": "電影: 驚奇隊長",
         "category": "3",
         "date": "2021-1-4",
@@ -38,7 +34,6 @@
         "ownerID": ""
       },
       {
-        "id": "5",
         "name": "租金",
         "category": "1",
         "date": "2021-2-1",
