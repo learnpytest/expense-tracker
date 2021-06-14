@@ -44,29 +44,29 @@
     ],
     "category": [
       {
-        "id": 1,
+        "id": "1",
         "name": "家居業務",
-        "imageElement": "<i class=\"fas fa- home\"></i>"
+        "imageElementClass": "fas fa-home"
       },
       {
-        "id": 2,
+        "id": "2",
         "name": "交通出行",
-        "imageElement": "<i class=\"fas fa-shuttle-van\"></i>"
+        "imageElementClass": "fas fa-shuttle-van"
       },
       {
-        "id": 3,
+        "id": "3",
         "name": "休閒娛樂",
-        "imageElement": "<i class=\"fas fa-grin-beam\"></i>"
+        "imageElementClass": "fas fa-grin-beam"
       },
       {
-        "id": 4,
+        "id": "4",
         "name": "餐飲食品",
-        "imageElement": "<i class=\"fas fa-utensils\"></i>"
+        "imageElementClass": "fas fa-utensils"
       },
       {
-        "id": 5,
+        "id": "5",
         "name": "其他",
-        "imageElement": "<i class=\"fas fa-pen\"></i>"
+        "imageElementClass": "fas fa-pen"
       }
     ]
   }

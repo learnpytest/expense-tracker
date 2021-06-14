@@ -22,28 +22,31 @@
     </div>
   </div>
   <ul class="list-group">
-    {{!-- {{#each}} --}}
+    {{#each recordsArr}}
     <li class="list-group-item">
       <div class="row">
         <div class="col-auto mr-auto">
           <h2 style="display: inline; vertical-align:middle;">
-            <i class="fas fa-utensils"></i>
+            <i class="{{getCategoryElement
+            ../categoryArr
+            this.category
+            }}"></i>
           </h2>
           <h4 style="display: inline; vertical-align: middle;">
-            午餐
+            {{this.name}}
             <p class="text-muted text-right mr-1"
-               style="font-size:8px;">2020-1-1</p>
+               style="font-size:8px;">{{this.date}}</p>
           </h4>
         </div>
         <div class="col-auto mr-auto">
           <h5 style="display: inline; vertical-align: middle;">
-            60
+            {{this.amount}}
           </h5>
         </div>
         <div class="col-auto">
           <a class="btn btn-success"
-             href="/records/:id/edit">修改</a>
-          <form action="/records/:id?_method=DELETE"
+             href="/records/{{this._id}}/edit">修改</a>
+          <form action="/records/{{this._id}}?_method=DELETE"
                 method="POST"
                 style="display: inline;">
             <button class="btn btn-danger"
@@ -52,6 +55,6 @@
         </div>
       </div>
     </li>
-    {{!-- {{/each}} --}}
+    {{/each}}
   </ul>
 </div>
