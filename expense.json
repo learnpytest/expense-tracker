@@ -68,6 +68,18 @@
         "name": "其他",
         "imageElementClass": "fas fa-pen"
       }
+    ],
+    "user": [
+      {
+        "firstName": "Steve",
+        "email": "captain@hotmail.com",
+        "password": "icandothisallday"
+      },
+      {
+        "firstName": "Peter",
+        "email": "peter@parker.com",
+        "password": "enajyram"
+      }
     ]
   }
 }

@@ -3,12 +3,16 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const helpers = require('handlebars-helpers')()
 const moment = require('moment')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 
 const routes = require('./routes')
 require('./config/mongoose')
 
 const app = express()
 const PORT = process.env.PORT || 3000
+
+const SSESSION_ID = 'sid'
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main', extname: '.hbs', helpers: {
@@ -34,6 +38,9 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+
+app.use(session({ key: SSESSION_ID, secret: 'my secret food', resave: false, saveUninitialized: false, cookie: { expires: 1000000 } }))
+app.use(cookieParser())
 
 app.use(routes)
 
