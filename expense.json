@@ -1,0 +1,78 @@
+{
+  "results": {
+    "record": [
+      {
+        "id": "1",
+        "name": "午餐",
+        "category": "4",
+        "date": "2021-1-1",
+        "amount": 60,
+        "footnote": "",
+        "ownerID": ""
+      },
+      {
+        "id": "2",
+        "name": "晚餐",
+        "category": "4",
+        "date": "2021-1-2",
+        "amount": 60,
+        "footnote": "",
+        "ownerID": ""
+      },
+      {
+        "id": "3",
+        "name": "捷運",
+        "category": "2",
+        "date": "2021-1-3",
+        "amount": 120,
+        "footnote": "",
+        "ownerID": ""
+      },
+      {
+        "id": "4",
+        "name": "電影: 驚奇隊長",
+        "category": "3",
+        "date": "2021-1-4",
+        "amount": 220,
+        "footnote": "",
+        "ownerID": ""
+      },
+      {
+        "id": "5",
+        "name": "租金",
+        "category": "1",
+        "date": "2021-2-1",
+        "amount": 25000,
+        "footnote": "",
+        "ownerID": ""
+      }
+    ],
+    "category": [
+      {
+        "id": 1,
+        "name": "家居業務",
+        "imageElement": "<i class=\"fas fa- home\"></i>"
+      },
+      {
+        "id": 2,
+        "name": "交通出行",
+        "imageElement": "<i class=\"fas fa-shuttle-van\"></i>"
+      },
+      {
+        "id": 3,
+        "name": "休閒娛樂",
+        "imageElement": "<i class=\"fas fa-grin-beam\"></i>"
+      },
+      {
+        "id": 4,
+        "name": "餐飲食品",
+        "imageElement": "<i class=\"fas fa-utensils\"></i>"
+      },
+      {
+        "id": 5,
+        "name": "其他",
+        "imageElement": "<i class=\"fas fa-pen\"></i>"
+      }
+    ]
+  }
+}

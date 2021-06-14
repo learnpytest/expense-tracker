@@ -2,20 +2,36 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const recordSchema = new Schema({
+  id: {
+    type: String,
+    require: true
+  },
   name: {
     type: String,
-    required: true
+    required: [true, "Name is required"]
   },
   category: {
     type: String,
   },
   date: {
-    type: String,
-    required: true
+    type: Date,
+    required: [true, "Date is required"]
   },
   amount: {
     type: Number,
-    require: true
+    require: [true, "Amount is required"],
+    min: [0, "Negative number is not accepted"]
+  },
+  footnote: {
+    type: String
+  },
+  ownerID: {
+    type: String
+  },
+  isPublic: {
+    type: Boolean,
+    //tobe modified after user account is set
+    default: true
   }
 })
 
