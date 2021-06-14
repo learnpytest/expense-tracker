@@ -31,6 +31,8 @@ router.get('/:id/edit', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params
+  const { isPublic } = req.body
+  req.body.isPublic = isPublic === 'on'
   await Record.findOneAndUpdate({ "_id": id }, { $set: req.body })
   return res.redirect('/')
 })

@@ -42,8 +42,12 @@
     {{#each recordsArr}}
     <li class="list-group-item">
       <div class="row">
+        <div class="col-1">{{#if this.isPublic}}<i class="fas fa-lock-open"></i>{{else}}<i
+             class="fas fa-lock"></i>{{/if}}</div>
         <div class="col-3 mr-auto">
+
           <h2 style="display: inline; vertical-align:middle;">
+
             <i class="{{getCategoryElement
             ../categoryArr
             this.category
