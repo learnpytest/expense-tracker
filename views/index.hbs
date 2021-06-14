@@ -1,0 +1,57 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <form action="/records/category"
+            method="GET">
+        <div class="form-group">
+          <label for="category">類別</label>
+          <select name="category"
+                  id="category">
+            <option value="living">家居物業</option>
+            <option value="transport">交通出行</option>
+            <option value="entertainment">休閒娛樂</option>
+            <option value="food">餐飲食品</option>
+            <option value="other">其他</option>
+          </select>
+        </div>
+      </form>
+      <small class="show-total-amount">
+        總金額:
+      </small>
+      <h1 class="font-weight-bolder text-center">100</h1>
+    </div>
+  </div>
+  <ul class="list-group">
+    {{!-- {{#each}} --}}
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-auto mr-auto">
+          <h2 style="display: inline; vertical-align:middle;">
+            <i class="fas fa-utensils"></i>
+          </h2>
+          <h4 style="display: inline; vertical-align: middle;">
+            午餐
+            <p class="text-muted text-right mr-1"
+               style="font-size:8px;">2020-1-1</p>
+          </h4>
+        </div>
+        <div class="col-auto mr-auto">
+          <h5 style="display: inline; vertical-align: middle;">
+            60
+          </h5>
+        </div>
+        <div class="col-auto">
+          <a class="btn btn-success"
+             href="/records/:id/edit">修改</a>
+          <form action="/records/:id?_method=DELETE"
+                method="POST"
+                style="display: inline;">
+            <button class="btn btn-danger"
+                    type="submit">刪除</button>
+          </form>
+        </div>
+      </div>
+    </li>
+    {{!-- {{/each}} --}}
+  </ul>
+</div>
