@@ -10,6 +10,12 @@ const { loginCheckerRedirectLogin, loginCheckerRedirectHome } = require('../tool
 // const users = require('./modules/users')
 
 // router.use('/users', users)
+router.use((req, res, next) => {
+  const url = req.headers.referer
+  if (url !== undefined) res.locals.url = url
+  // console.log(req.headers.referer)
+  next()
+})
 router.use('/login', loginCheckerRedirectHome, login)
 router.use('/logout', (req, res) => {
 
