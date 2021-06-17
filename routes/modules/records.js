@@ -31,7 +31,10 @@ router.get('/new', (req, res) => {
 router.get('/:id/edit', async (req, res) => {
   const { id } = req.params
   const record = await Record.findById({ _id: id }).lean()
-  return res.render('edit', { record })
+  const category = record.category
+  // return console.log(record.category)
+  const categoryArr = await Category.find().lean()
+  return res.render('edit', { record, categoryArr, item: category })
 })
 
 router.put('/:id', [
@@ -41,6 +44,7 @@ router.put('/:id', [
 ], inputNameValid, async (req, res) => {
   const { id } = req.params
   const { isPublic } = req.body
+  // return console.log(req.body)
   req.body.isPublic = isPublic === 'on'
   await Record.findOneAndUpdate({ "_id": id }, { $set: req.body })
   return res.redirect('/')

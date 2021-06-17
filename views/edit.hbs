@@ -54,26 +54,17 @@
                   class="form-control"
                   name="category"
                   required>
-            <option value="1"
-                    {{isCategorySelected
-                    record.category "1"
-                    }}>家居物業</option>
-            <option value="2"
-                    {{isCategorySelected
-                    record.category "2"
-                    }}>交通出行</option>
-            <option value="3"
-                    {{isCategorySelected
-                    record.category "3"
-                    }}>休閒娛樂</option>
-            <option value="4"
-                    {{isCategorySelected
-                    record.category "4"
-                    }}>餐飲食品</option>
-            <option value="5"
-                    {{isCategorySelected
-                    record.category "5"
-                    }}>其他</option>
+
+            <option value="">篩選</option>
+            {{#each categoryArr}}
+            {{#if (eq ../item this.id)}}
+            <option value="{{this.id}}"
+                    selected>{{this.name}}
+            </option>
+            {{else}}
+            <option value="{{this.id}}">{{this.name}}
+              {{/if}}
+              {{/each}}
           </select>
           <div class="valid-feedback"></div>
           <div class="invalid-feedback"></div>
