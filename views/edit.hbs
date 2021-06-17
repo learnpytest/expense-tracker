@@ -54,17 +54,7 @@
                   class="form-control"
                   name="category"
                   required>
-
-            <option value="">篩選</option>
-            {{#each categoryArr}}
-            {{#if (eq ../item this.id)}}
-            <option value="{{this.id}}"
-                    selected>{{this.name}}
-            </option>
-            {{else}}
-            <option value="{{this.id}}">{{this.name}}
-              {{/if}}
-              {{/each}}
+            {{>category}}
           </select>
           <div class="valid-feedback"></div>
           <div class="invalid-feedback"></div>

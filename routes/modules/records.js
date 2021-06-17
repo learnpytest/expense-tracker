@@ -23,8 +23,9 @@ router.get('/category', async (req, res) => {
 })
 //篩選類別
 
-router.get('/new', (req, res) => {
-  return res.render('new')
+router.get('/new', async (req, res) => {
+  const categoryArr = await Category.find().lean()
+  return res.render('new', { categoryArr, item: false })
 })
 
 // 編輯一筆資料
@@ -32,7 +33,6 @@ router.get('/:id/edit', async (req, res) => {
   const { id } = req.params
   const record = await Record.findById({ _id: id }).lean()
   const category = record.category
-  // return console.log(record.category)
   const categoryArr = await Category.find().lean()
   return res.render('edit', { record, categoryArr, item: category })
 })

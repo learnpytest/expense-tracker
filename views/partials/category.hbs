@@ -1,0 +1,10 @@
+<option value="">類別</option>
+{{#each categoryArr}}
+{{#if (eq ../item this.id)}}
+<option value="{{this.id}}"
+        selected>{{this.name}}
+</option>
+{{else}}
+<option value="{{this.id}}">{{this.name}}
+  {{/if}}
+  {{/each}}

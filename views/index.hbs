@@ -4,22 +4,12 @@
       <form action="/records/category"
             method="GET">
         <div class="form-group">
-          <label for="category">類別</label>
+          <label for="category">篩選</label>
           <select name="category"
                   id="category"
+                  class="form-control"
                   onchange="this.form.submit()">
-
-            <option value="">篩選</option>
-            {{#each categoryArr}}
-
-            {{#if (eq ../item this.id)}}
-            <option value="{{this.id}}"
-                    selected>{{this.name}}
-            </option>
-            {{else}}
-            <option value="{{this.id}}">{{this.name}}
-              {{/if}}
-              {{/each}}
+            {{> category}}
           </select>
         </div>
       </form>
