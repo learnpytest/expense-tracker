@@ -10,6 +10,7 @@ const getCategoryElement = async function (categoryID) {
 router.get('/', async (req, res) => {
   const recordsArr = await Record.find().lean()
   const categoryArr = await Category.find().lean()
+  // return console.log(categoryArr)
   return res.render('index', { recordsArr, categoryArr })
 })
 

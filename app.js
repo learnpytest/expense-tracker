@@ -23,9 +23,6 @@ app.engine('hbs', exphbs({
       });
       return amount
     },
-    isCategorySelected: function (item, category) {
-      if (item === category) return "selected"
-    },
     getCalendarDate: function (date) {
       return moment(date).format("YYYY-MM-DD")
     },

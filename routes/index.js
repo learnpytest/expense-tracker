@@ -13,7 +13,6 @@ const { loginCheckerRedirectLogin, loginCheckerRedirectHome } = require('../tool
 router.use((req, res, next) => {
   const url = req.headers.referer
   if (url !== undefined) res.locals.url = url
-  // console.log(req.headers.referer)
   next()
 })
 router.use('/login', loginCheckerRedirectHome, login)
