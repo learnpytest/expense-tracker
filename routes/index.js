@@ -4,6 +4,7 @@ const router = express.Router()
 const login = require('./modules/login')
 const home = require('./modules/home')
 const records = require('./modules/records')
+const users = require('./modules/users')
 
 const { loginCheckerRedirectLogin, loginCheckerRedirectHome } = require('../tools/utils')
 
@@ -21,5 +22,6 @@ router.use('/logout', (req, res) => {
 })
 router.use('/', loginCheckerRedirectLogin, home)
 router.use('/records', records)
+router.use('/users', users)
 
 module.exports = router
