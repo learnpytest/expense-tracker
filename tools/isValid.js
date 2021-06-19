@@ -1,5 +1,8 @@
 const { validationResult } = require('express-validator')
-const inputNameValid = (req, res, next) => {
+const Category = require('../models/Category')
+
+const inputNameValid = async (req, res, next) => {
+  const categoryArr = await Category.find().lean()
   const errors = validationResult(req)
   if (errors.isEmpty()) {
     next()
@@ -9,7 +12,7 @@ const inputNameValid = (req, res, next) => {
     const alertMessage = errors.array()
     record._id = req.params.id
     record.isPublic = isPublic === 'on'
-    return res.render('edit', { record, alertMessage })
+    return res.render('edit', { record, alertMessage, categoryArr, item: record.category })
   }
 }
 module.exports = { inputNameValid }

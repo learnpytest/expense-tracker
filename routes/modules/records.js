@@ -55,7 +55,7 @@ router.get('/:id/edit', async (req, res, next) => {
 
 router.put('/:id', [
   check('name', 'Please enter at least a word for name').trim().exists().isLength({ min: 1 }), check('date', 'Not valid date format').exists().isDate({ format: "YYYY/MM/DD" }),
-  check('amount', 'The amount has to be 0 or positive integer').exists().isInt({ min: 0 }).isNumeric().matches(/^[1-9]\d*|^0$/)
+  check('amount', 'The amount has to be 0 or positive integer').exists().isNumeric().matches(/^([1-9]\d*)|0$/)
   //For edit form input, for amount, Only integer input and >= 0, exclude exception of starting by 0 such as 01
 ], inputNameValid, async (req, res) => {
   const { id } = req.params
