@@ -20,54 +20,7 @@
     </div>
   </div>
   <ul class="list-group">
-    {{#each recordsArr}}
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-1">{{#if this.isPublic}}<i class="fas fa-lock-open"></i>{{else}}<i
-             class="fas fa-lock"></i>{{/if}}</div>
-        <div class="col-3 mr-auto">
-
-          <h2 style="display: inline; vertical-align:middle;">
-
-            <i class="{{getCategoryElement
-            ../categoryArr
-            this.category
-            }}"></i>
-          </h2>
-          <h4 style="display: inline; vertical-align: middle;">
-            {{this.name}}
-            <p class="text-muted text-left mr-1"
-               style="font-size:8px;">{{getCalendarDate this.date}}</p>
-          </h4>
-        </div>
-        <div class="col-3 mr-auto">
-          <h5 style="display: inline; vertical-align: middle;">
-            {{this.amount}}
-          </h5>
-        </div>
-        <div class="col-auto">
-          <a class="btn btn-warning"
-             href="/records/{{this._id}}/edit">修改</a>
-          <form action="/records/{{this._id}}?_method=DELETE"
-                method="POST"
-                style="display: inline;">
-            <button class="btn btn-danger"
-                    type="submit">刪除</button>
-          </form>
-        </div>
-      </div>
-    </li>
-    {{/each}}
-    {{#if errorMessage}}
-    <li class="list-group-item text-center">
-      {{{errorMessage}}}
-    </li>
-    {{/if}}
-    <li class="list-group-item text-center">
-      <a class="btn btn-success"
-         href="/records/new">
-        <h1 class="text-center">新增支出</h1>
-      </a>
-    </li>
+    {{!-- 用迴圈產生支出清單、顯示錯誤訊息提式使用者、新增支出元件 --}}
+    {{> records}}
   </ul>
 </div>
