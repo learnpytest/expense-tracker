@@ -25,8 +25,14 @@ router.use((req, res, next) => {
 })
 
 router.use('/login', loginCheckerRedirectHome, login)
-router.use('/logout', (req, res) => {
-
+router.use('/logout', loginCheckerRedirectLogin, (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return next(err)
+    }
+    res.clearCookie()
+    return res.redirect('/login')
+  })
 })
 router.use('/', loginCheckerRedirectLogin, home)
 router.use('/records', records)
