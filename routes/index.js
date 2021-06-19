@@ -3,29 +3,35 @@ const router = express.Router()
 
 const login = require('./modules/login')
 const home = require('./modules/home')
+const admin = require('./modules/admin')
 const records = require('./modules/records')
 const users = require('./modules/users')
-const ApiErrors = require('../tools/apiErrors')
-const ROLE = {
-  user: "user",
-  admin: "admin"
-}
 
-const { loginCheckerRedirectLogin, loginCheckerRedirectHome, roleChecker } = require('../tools/utils')
+const ApiErrors = require('../tools/apiErrors')
+
+const { loginCheckerRedirectLogin, loginCheckerRedirectHome, roleAuthChecker } = require('../tools/utils')
+
+// router.use((req, res, next) => {
+//   const url = req.headers.referer
+//   if (url !== undefined) res.locals.url = url
+//   next()
+// })
 
 router.use((req, res, next) => {
-  const url = req.headers.referer
-  if (url !== undefined) res.locals.url = url
+  if (req.session.user && req.cookies) {
+    res.locals.firstName = req.session.user.firstName
+  }
   next()
 })
+
 router.use('/login', loginCheckerRedirectHome, login)
 router.use('/logout', (req, res) => {
 
 })
 router.use('/', loginCheckerRedirectLogin, home)
 router.use('/records', records)
-router.use('/users', users)
-router.use('/admin', loginCheckerRedirectLogin, roleChecker(ROLE.admin), admin)
+// router.use('/users', users)
+router.use('/admin', loginCheckerRedirectLogin, roleAuthChecker('admin'), admin)
 
 router.use((req, res, next) => {
   next(new ApiErrors().incomingRequest('Page Not Found'))

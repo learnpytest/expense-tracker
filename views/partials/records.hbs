@@ -2,9 +2,15 @@
 {{#each recordsArr}}
 <li class="list-group-item">
   <div class="row">
-    <div class="col-1">{{#if this.isPublic}}<i class="fas fa-lock-open"></i>{{else}}<i class="fas fa-lock"></i>{{/if}}
+    <div class="col-2 col-lg-1">{{#if this.isPublic}}<i class="fas fa-lock-open"></i>{{else}}<i
+         class="fas fa-lock"></i>{{/if}}
     </div>
-    <div class="col-3 mr-auto">
+    <div class="col-4 col-lg-2 mr-auto">
+      <small style="display: inline; vertical-align: middle;">
+        Created by:
+      </small><small>{{this.owner}}</small>
+    </div>
+    <div class="col-3 col-lg-2 mr-auto">
 
       <h2 style="display: inline; vertical-align:middle;">
 
@@ -19,25 +25,40 @@
            style="font-size:8px;">{{getCalendarDate this.date}}</p>
       </h4>
     </div>
-    <div class="col-3 mr-auto">
+    <div class="col-1 col-lg-1 mr-auto">
       <h5 style="display: inline; vertical-align: middle;">
         {{this.amount}}
       </h5>
     </div>
+    {{!-- 刪除與修改 --}}
     <div class="col-auto">
-      <a class="btn btn-warning"
-         href="/records/{{this._id}}/edit">修改</a>
+      <a href="/records/{{this._id}}/edit"
+         style="text-decoration:none">
+        <button class="btn btn-warning"
+                {{#if
+                (isnt
+                this.isPublic
+                true)}}disabled{{/if}}>修改</button>
+      </a>
+
       <form action="/records/{{this._id}}?_method=DELETE"
             method="POST"
             style="display: inline;">
         {{!-- 這裡是刪除元件 --}}
         <!-- Button trigger modal -->
+
+
         <button type="button"
                 class="btn btn-danger"
                 data-toggle="modal"
-                data-target="#delete{{this._id}}">
+                data-target="#delete{{this._id}}"
+                {{#if
+                (isnt
+                this.isPublic
+                true)}}disabled{{/if}}>
           刪除
         </button>
+
         <!-- Modal -->
         <div class="modal fade"
              id="delete{{this._id}}"
@@ -62,6 +83,7 @@
         {{!-- 這裡是刪除元件 --}}
       </form>
     </div>
+    {{!-- 刪除與修改 --}}
   </div>
 </li>
 {{/each}}

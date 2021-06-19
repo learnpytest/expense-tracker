@@ -21,8 +21,13 @@ const recordSchema = new Schema({
   footnote: {
     type: String
   },
-  ownerID: {
-    type: String
+  owner: {
+    type: String,
+    required: true,
+  },
+  group: {
+    type: Array,
+    required: true,
   },
   isPublic: {
     type: Boolean,
