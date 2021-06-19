@@ -31,6 +31,7 @@ router.get('/category', async (req, res, next) => {
 })
 //篩選類別
 
+//新增支出頁面
 router.get('/new', async (req, res, next) => {
   try {
     const categoryArr = await Category.find().lean()
@@ -39,6 +40,7 @@ router.get('/new', async (req, res, next) => {
     return next(err)
   }
 })
+//新增支出頁面
 
 // 編輯一筆資料
 router.get('/:id/edit', async (req, res, next) => {
@@ -71,7 +73,11 @@ router.put('/:id', [
 // 編輯一筆資料
 
 //新增一筆支出
-router.post('/', async (req, res, next) => {
+router.post('/', [
+  check('name', 'Please enter at least a word for name').trim().exists().isLength({ min: 1 }), check('date', 'Not valid date format').exists().isDate({ format: "YYYY/MM/DD" }),
+  check('amount', 'The amount has to be 0 or positive integer').exists().isNumeric().matches(/^([1-9]\d*)|0$/)
+  //For edit form input, for amount, Only integer input and >= 0, exclude exception of starting by 0 such as 01
+], inputNameValid, async (req, res, next) => {
   const newDate = req.body
   const { isPublic } = req.body
   req.body.isPublic = isPublic === 'on'
