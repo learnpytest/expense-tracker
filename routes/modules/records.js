@@ -73,6 +73,8 @@ router.put('/:id', [
 //新增一筆支出
 router.post('/', async (req, res, next) => {
   const newDate = req.body
+  const { isPublic } = req.body
+  req.body.isPublic = isPublic === 'on'
   try {
     await Record.create(newDate)
     return res.redirect('/')
