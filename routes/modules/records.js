@@ -6,6 +6,8 @@ const Category = require('../../models/Category')
 
 const ApiErrors = require('../../tools/apiErrors')
 
+
+
 //驗證
 const { check, validationResult } = require('express-validator')
 const { inputNameValid } = require('../../tools/isValid')
@@ -27,7 +29,8 @@ router.get('/category', async (req, res, next) => {
     }
     return res.render('index', { recordsArr: filteredByCategory, categoryArr, errorMessage, item: category })
   } catch (err) {
-    return next(err)
+    console.log(err)
+    return next(new ApiErrors().internalHandling('Failed filtering'))
   }
 })
 //篩選類別
@@ -52,8 +55,10 @@ router.get('/:id/edit', async (req, res, next) => {
     const categoryArr = await Category.find().lean()
     return res.render('edit', { record, categoryArr, item: category })
   } catch (err) {
-    return next(new ApiErrors().incomingRequest('Page Not Found')) //錯誤處理，回應404 Page Not Found
+    console.log(err)
+    return next(new ApiErrors().internalHandling('Editing Failed'))
   }
+
 })
 
 router.put('/:id', [
@@ -68,7 +73,7 @@ router.put('/:id', [
     await Record.findOneAndUpdate({ "_id": id }, { $set: req.body })
     return res.redirect('/')
   } catch (err) {
-    return next(err) //錯誤處理
+    return next(new ApiErrors().internalHandling('Failed updating database')) //錯誤處理
   }
 })
 // 編輯一筆資料
@@ -81,12 +86,14 @@ router.post('/', [
 ], inputNameValid, async (req, res, next) => {
   const newDate = req.body
   const { isPublic } = req.body
+  newDate.owner = req.session.user.email
+  newDate.group = [req.session.user.email]
   req.body.isPublic = isPublic === 'on'
   try {
     await Record.create(newDate)
     return res.redirect('/')
   } catch (err) {
-    return next(err)
+    return next(new ApiErrors().internalHandling('Failed updating database'))
   }
 })
 //新增一筆支出
@@ -98,7 +105,7 @@ router.delete('/:id', async (req, res, err) => {
     await Record.findOneAndDelete({ "_id": id })
     return res.redirect('/')
   } catch (err) {
-    next(err)
+    next(new ApiErrors().internalHandling('Failed deleting doc from database'))
   }
 })
 //刪除一筆支出

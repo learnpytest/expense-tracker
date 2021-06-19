@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 router.get('/dashboard', scopedRecords, async (req, res, next) => {
   try {
     const categoryArr = await Category.find().lean()
-    return res.render('index', { recordsArr: req.recordsArrAllowed, categoryArr })
+    return res.render('index', { recordsArr: req.recordsArrAllowed, categoryArr, layout: 'userDashboard' })
   } catch (err) {
     return next(err)
   }

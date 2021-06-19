@@ -9,7 +9,7 @@ const users = require('./modules/users')
 
 const ApiErrors = require('../tools/apiErrors')
 
-const { loginCheckerRedirectLogin, loginCheckerRedirectHome, roleAuthChecker } = require('../tools/utils')
+const { loginCheckerRedirectLogin, loginCheckerRedirectHome, userAuthChecker, adminAuthChecker } = require('../tools/utils')
 
 // router.use((req, res, next) => {
 //   const url = req.headers.referer
@@ -34,10 +34,9 @@ router.use('/logout', loginCheckerRedirectLogin, (req, res) => {
     return res.redirect('/login')
   })
 })
-router.use('/', loginCheckerRedirectLogin, home)
-router.use('/records', records)
-// router.use('/users', users)
-router.use('/admin', loginCheckerRedirectLogin, roleAuthChecker('admin'), admin)
+router.use('/admin', loginCheckerRedirectLogin, adminAuthChecker(), admin)
+router.use('/records', loginCheckerRedirectLogin, records)
+router.use('/', loginCheckerRedirectLogin, userAuthChecker(), home)
 
 router.use((req, res, next) => {
   next(new ApiErrors().incomingRequest('Page Not Found'))

@@ -1,9 +1,19 @@
 const ApiErrors = require('../tools/apiErrors')
 
-function roleAuthChecker(role) {
+function userAuthChecker() {
   return (req, res, next) => {
-    if (req.session.user.role !== role) {
-      res.redirect('/home')
+    if (req.session.user.role === 'user') {
+      return next()
+    } else if (req.session.user.role === 'admin') {
+      return res.redirect('/admin')
+    }
+    return next(new ApiErrors().incomingUserRequest('Permission denied'))
+  }
+}
+
+function adminAuthChecker() {
+  return (req, res, next) => {
+    if (req.session.user.role !== 'admin') {
       return next(new ApiErrors().incomingUserRequest('Permission denied'))
     }
     next()
@@ -26,5 +36,4 @@ const loginCheckerRedirectHome = (req, res, next) => {
   }
 }
 
-
-module.exports = { loginCheckerRedirectLogin, loginCheckerRedirectHome, roleAuthChecker }
+module.exports = { loginCheckerRedirectLogin, loginCheckerRedirectHome, userAuthChecker, adminAuthChecker }

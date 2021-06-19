@@ -16,10 +16,14 @@ router.get('/users', async (req, res) => {
   return res.render('user', { usersArr })
 })
 
+// router.get('/', async (req, res) => {
+//   return res.redirect('/admin')
+// })
+
 router.get('/', async (req, res) => {
   const recordsArr = await Record.find().lean()
   const categoryArr = await Category.find().lean()
-  return res.render('admin', { recordsArr, categoryArr })
+  return res.render('admin', { recordsArr, categoryArr, layout: 'adminPortal' })
 })
 
 module.exports = router
