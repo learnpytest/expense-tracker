@@ -9,6 +9,9 @@ const session = require('express-session')
 const routes = require('./routes')
 require('./config/mongoose')
 
+const apiErrorHandler = require('./tools/apiErrorHandler')
+const ApiErrors = require('./tools/apiErrors')
+
 const app = express()
 const PORT = process.env.PORT || 3000
 
@@ -40,6 +43,8 @@ app.use(session({ key: SSESSION_ID, secret: 'my secret food', resave: false, sav
 app.use(cookieParser())
 
 app.use(routes)
+
+app.use(apiErrorHandler)
 
 app.listen(PORT, () => {
   console.log(`App is running on http://localhost:${PORT}`)

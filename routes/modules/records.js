@@ -4,37 +4,53 @@ const router = express.Router()
 const Record = require('../../models/Record')
 const Category = require('../../models/Category')
 
+const ApiErrors = require('../../tools/apiErrors')
+
 //驗證
 const { check, validationResult } = require('express-validator')
 const { inputNameValid } = require('../../tools/isValid')
 //驗證
 
 //篩選類別
-router.get('/category', async (req, res) => {
+router.get('/category', async (req, res, next) => {
   const { category } = req.query
-  const filteredByCategory = await Record.find({ category }).lean()
-  const categoryArr = await Category.find().lean()
+  try {
+    const isExistsCategory = await Category.findOne({ id: category })
+    if (!isExistsCategory) return next(new ApiErrors().incomingRequest('Page Not Found')) //使用者在這支路由使用不在開放權限內的category 做API請求，回應404 Page Not Found
 
-  let errorMessage = ''
-  if (!filteredByCategory.length) {
-    errorMessage = `<div class="alert alert-primary" role="alert">沒有相關支出!</div>`
+    const filteredByCategory = await Record.find({ category }).lean()
+    const categoryArr = await Category.find().lean()
+    let errorMessage = ''
+    if (!filteredByCategory.length) {
+      errorMessage = `<div class="alert alert-primary" role="alert">沒有相關支出!</div>`
+    }
+    return res.render('index', { recordsArr: filteredByCategory, categoryArr, errorMessage, item: category })
+  } catch (err) {
+    return next(err)
   }
-  return res.render('index', { recordsArr: filteredByCategory, categoryArr, errorMessage, item: category })
 })
 //篩選類別
 
-router.get('/new', async (req, res) => {
-  const categoryArr = await Category.find().lean()
-  return res.render('new', { categoryArr, item: false })
+router.get('/new', async (req, res, next) => {
+  try {
+    const categoryArr = await Category.find().lean()
+    return res.render('new', { categoryArr, item: false })
+  } catch (err) {
+    return next(err)
+  }
 })
 
 // 編輯一筆資料
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', async (req, res, next) => {
   const { id } = req.params
-  const record = await Record.findById({ _id: id }).lean()
-  const category = record.category
-  const categoryArr = await Category.find().lean()
-  return res.render('edit', { record, categoryArr, item: category })
+  try {
+    const record = await Record.findById({ _id: id }).lean()
+    const category = record.category
+    const categoryArr = await Category.find().lean()
+    return res.render('edit', { record, categoryArr, item: category })
+  } catch (err) {
+    return next(new ApiErrors().incomingRequest('Page Not Found')) //錯誤處理，回應404 Page Not Found
+  }
 })
 
 router.put('/:id', [
@@ -44,25 +60,38 @@ router.put('/:id', [
 ], inputNameValid, async (req, res) => {
   const { id } = req.params
   const { isPublic } = req.body
-  // return console.log(req.body)
   req.body.isPublic = isPublic === 'on'
-  await Record.findOneAndUpdate({ "_id": id }, { $set: req.body })
-  return res.redirect('/')
+  try {
+    await Record.findOneAndUpdate({ "_id": id }, { $set: req.body })
+    return res.redirect('/')
+  } catch (err) {
+    return next(err) //錯誤處理
+  }
 })
 // 編輯一筆資料
 
 //新增一筆支出
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   const newDate = req.body
-  await Record.create(newDate)
-  return res.redirect('/')
+  try {
+    await Record.create(newDate)
+    return res.redirect('/')
+  } catch (err) {
+    return next(err)
+  }
 })
 //新增一筆支出
 
-router.delete('/:id', async (req, res) => {
+//刪除一筆支出
+router.delete('/:id', async (req, res, err) => {
   const { id } = req.params
-  await Record.findOneAndDelete({ "_id": id })
-  return res.redirect('/')
+  try {
+    await Record.findOneAndDelete({ "_id": id })
+    return res.redirect('/')
+  } catch (err) {
+    next(err)
+  }
 })
+//刪除一筆支出
 
 module.exports = router
