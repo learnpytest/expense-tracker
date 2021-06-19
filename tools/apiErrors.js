@@ -7,6 +7,10 @@ ApiErrors.prototype.incomingRequest = function (msg) {
   return new ApiErrors(404, msg)
 }
 
+ApiErrors.prototype.incomingUserRequest = function (msg) {
+  return new ApiErrors(401, msg)
+}
+
 ApiErrors.prototype.internalHandling = function (msg) {
   return new ApiErrors(500, msg)
 }

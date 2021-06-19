@@ -73,13 +73,19 @@
       {
         "firstName": "Steve",
         "email": "captain@hotmail.com",
-        "password": "icandothisallday"
+        "password": "icandothisallday",
+        "role": "admin"
       },
       {
         "firstName": "Peter",
         "email": "peter@parker.com",
-        "password": "enajyram"
+        "password": "enajyram",
+        "role": "user"
       }
-    ]
+    ],
+    "role": {
+      "admin": "admin",
+      "user": "user"
+    }
   }
 }
