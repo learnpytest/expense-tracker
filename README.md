@@ -51,7 +51,7 @@ $ npm run seed
 - Express
 - Seed data: expense.json
 - Using Bootstrap, RWD
-- Using middleware, express routes, RESTFUL API
+- Using RESTFUL API
 - Using express-validator
 - Custom error handling
 - The app has scalabilities to dynamically add more record and category
