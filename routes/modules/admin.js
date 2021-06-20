@@ -4,7 +4,7 @@ const User = require('../../models/User')
 const { scopedRecords } = require('../../tools/permission')
 const Record = require('../../models/Record')
 
-//這裡是使用者管理相關的元件
+//this is user management web apps
 router.get('/users', async (req, res) => {
   const usersArr = await User.find().lean()
   const userOwnedRecord = {}
@@ -13,12 +13,11 @@ router.get('/users', async (req, res) => {
   }
   return res.render('user', { usersArr, userNumber: usersArr.length, userOwnedRecord, layout: 'adminPortal' })
 })
-//這裡是使用者管理相關的元件
+//this is user management web apps
 
-//這裡是管理者可以看到所有使用者全部的支出清單
+//admin can check all expense records so get all information from database
 router.get('/', scopedRecords, async (req, res) => {
   return res.render('index', { recordsArr: req.recordsArrAllowed, categoryArr: req.categoryArr, layout: 'adminPortal' })
 })
-//這裡是管理者可以看到所有使用者全部的支出清單
 
 module.exports = router

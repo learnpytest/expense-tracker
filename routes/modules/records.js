@@ -35,7 +35,7 @@ router.get('/category', scopedRecords, async (req, res, next) => {
 })
 //區分admin與user可取得的資料範圍，再從資料範圍篩選類別
 
-//新增支出頁面
+//導向新增支出頁面
 router.get('/new', async (req, res, next) => {
   try {
     const categoryArr = await Category.find().lean()
@@ -45,9 +45,9 @@ router.get('/new', async (req, res, next) => {
     return next(new ApiErrors().incomingRequest('Page Not Found'))
   }
 })
-//新增支出頁面
+//導向新增支出頁面
 
-// 編輯一筆資料
+// 導向編輯頁面
 router.get('/:id/edit', async (req, res, next) => {
   const { id } = req.params
   try {
@@ -62,6 +62,7 @@ router.get('/:id/edit', async (req, res, next) => {
 
 })
 
+//編輯一筆資料與送出表單
 router.put('/:id', [
   check('name', 'Enter at least a word').trim().exists().isLength({ min: 1 }), check('date', 'Not valid format').exists().isDate({ format: "YYYY/MM/DD" }),
   check('amount', 'Enter 0 or positive integer').exists().isNumeric().matches(/^([1-9]\d*)|0$/)
@@ -77,9 +78,9 @@ router.put('/:id', [
     return next(new ApiErrors().internalHandling('Failed updating database')) //錯誤處理
   }
 })
-// 編輯一筆資料
+//編輯一筆資料與送出表單
 
-//新增一筆支出
+//新增一筆支出與送出表單
 router.post('/', [
   check('name', 'Enter at least a word').trim().exists().isLength({ min: 1 }), check('date', 'Not valid format').exists().isDate({ format: "YYYY/MM/DD" }),
   check('amount', 'Enter 0 or positive integer').exists().isNumeric().matches(/^([1-9]\d*)|0$/)
@@ -96,7 +97,7 @@ router.post('/', [
     return next(new ApiErrors().internalHandling('Failed updating database'))
   }
 })
-//新增一筆支出
+//新增一筆支出與送出表單
 
 //刪除一筆支出
 router.delete('/:id', async (req, res, err) => {

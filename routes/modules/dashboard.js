@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
   res.redirect('/dashboard')
 })
 
+//get correct scope of information for user role request
 router.get('/dashboard', scopedRecords, async (req, res, next) => {
   try {
     return res.render('index', { recordsArr: req.recordsArrAllowed, categoryArr: req.categoryArr, layout: 'userDashboard' })
