@@ -19,6 +19,12 @@ const SSESSION_ID = 'sid'
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main', extname: '.hbs', helpers: {
+    getRecords: function (id, userOwnedRecord) {
+      return userOwnedRecord[`${id}`]
+    },
+    getCount: function (id, userOwnedRecord) {
+      return userOwnedRecord[`${id}`].length
+    },
     addAmount: function (simpleArr) {
       let amount = 0
       simpleArr.forEach(element => {

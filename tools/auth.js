@@ -1,4 +1,4 @@
-const ApiErrors = require('../tools/apiErrors')
+const ApiErrors = require('./apiErrors')
 
 function userAuthChecker() {
   return (req, res, next) => {
@@ -28,12 +28,12 @@ const loginCheckerRedirectLogin = (req, res, next) => {
   }
 }
 
-const loginCheckerRedirectHome = (req, res, next) => {
+const loginCheckerRedirectDashboard = (req, res, next) => {
   if (req.session.user && req.cookies) {
-    return res.redirect('/home')
+    return res.redirect('/dashboard')
   } else {
     next()
   }
 }
 
-module.exports = { loginCheckerRedirectLogin, loginCheckerRedirectHome, userAuthChecker, adminAuthChecker }
+module.exports = { loginCheckerRedirectLogin, loginCheckerRedirectDashboard, userAuthChecker, adminAuthChecker }

@@ -25,11 +25,7 @@ const recordSchema = new Schema({
     type: String,
     required: true,
   },
-  group: {
-    type: Array,
-    required: true,
-  },
-  isPublic: {
+  isCollab: {
     type: Boolean,
     //tobe modified after user account is set
     default: true

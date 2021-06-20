@@ -7,18 +7,13 @@ const Category = require('../../models/Category')
 const { scopedRecords } = require('../../tools/permission')
 //權限
 
-const getCategoryElement = async function (categoryID) {
-  const category = await Category.find({ id: categoryID }).lean()
-  return category[0].imageElement
-}
 router.get('/', async (req, res) => {
   res.redirect('/dashboard')
 })
 
 router.get('/dashboard', scopedRecords, async (req, res, next) => {
   try {
-    const categoryArr = await Category.find().lean()
-    return res.render('index', { recordsArr: req.recordsArrAllowed, categoryArr, layout: 'userDashboard' })
+    return res.render('index', { recordsArr: req.recordsArrAllowed, categoryArr: req.categoryArr, layout: 'userDashboard' })
   } catch (err) {
     return next(err)
   }

@@ -2,7 +2,7 @@
 {{#each recordsArr}}
 <li class="list-group-item">
   <div class="row">
-    <div class="col-2 col-lg-1">{{#if this.isPublic}}<i class="fas fa-lock-open"></i>{{else}}<i
+    <div class="col-2 col-lg-1">{{#if this.isCollab}}<i class="fas fa-lock-open"></i>{{else}}<i
          class="fas fa-lock"></i>{{/if}}
     </div>
     <div class="col-4 col-lg-2 mr-auto">
@@ -34,11 +34,7 @@
     <div class="col-auto">
       <a href="/records/{{this._id}}/edit"
          style="text-decoration:none">
-        <button class="btn btn-warning"
-                {{#if
-                (isnt
-                this.isPublic
-                true)}}disabled{{/if}}>修改</button>
+        <button class="btn btn-warning">修改</button>
       </a>
 
       <form action="/records/{{this._id}}?_method=DELETE"
@@ -46,19 +42,12 @@
             style="display: inline;">
         {{!-- 這裡是刪除元件 --}}
         <!-- Button trigger modal -->
-
-
         <button type="button"
                 class="btn btn-danger"
                 data-toggle="modal"
-                data-target="#delete{{this._id}}"
-                {{#if
-                (isnt
-                this.isPublic
-                true)}}disabled{{/if}}>
+                data-target="#delete{{this._id}}">
           刪除
         </button>
-
         <!-- Modal -->
         <div class="modal fade"
              id="delete{{this._id}}"

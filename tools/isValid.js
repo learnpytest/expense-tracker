@@ -11,7 +11,7 @@ const inputNameValid = async (req, res, next) => {
     const record = req.body
     const alertMessage = errors.array()
     record._id = req.params.id
-    record.isPublic = record.isPublic === 'on'
+    record.isCollab = record.isCollab === 'on'
     if (method === 'PUT' && path === `/${req.params.id}`) {
       return res.render('edit', { record, alertMessage, categoryArr, item: record.category });
     } else if (method === 'POST' && path === `/`) {
