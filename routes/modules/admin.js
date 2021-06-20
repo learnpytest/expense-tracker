@@ -4,22 +4,21 @@ const User = require('../../models/User')
 const { scopedRecords } = require('../../tools/permission')
 const Record = require('../../models/Record')
 
+//這裡是使用者管理相關的元件
 router.get('/users', async (req, res) => {
   const usersArr = await User.find().lean()
-  const counts = {}
   const userOwnedRecord = {}
   for (user of usersArr) {
-    // counts[user.email] = await Record.find({ owner: user.email }).countDocuments()
     userOwnedRecord[user._id] = await Record.find({ owner: user.email }).lean()
-
   }
-  // return console.log(userOwnedRecord['captain@hotmail.com'].length)
-  return res.render('user', { usersArr, userNumber: usersArr.length, userOwnedRecord })
+  return res.render('user', { usersArr, userNumber: usersArr.length, userOwnedRecord, layout: 'adminPortal' })
 })
+//這裡是使用者管理相關的元件
 
-
+//這裡是管理者可以看到所有使用者全部的支出清單
 router.get('/', scopedRecords, async (req, res) => {
   return res.render('index', { recordsArr: req.recordsArrAllowed, categoryArr: req.categoryArr, layout: 'adminPortal' })
 })
+//這裡是管理者可以看到所有使用者全部的支出清單
 
 module.exports = router

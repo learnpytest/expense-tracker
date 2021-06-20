@@ -9,7 +9,8 @@
         <div class="form-group">
           <select name="category"
                   id="category"
-                  class="form-control"
+                  class="form-select bg-secondary"
+                  style="color:black;"
                   onchange="this.form.submit()">
             {{> category}}
           </select>
@@ -20,7 +21,8 @@
         <input class="btn btn-info"
                value="Total Amount:"><span class="sr-only">(current)</span></input>
       </a>
-      <h1 class="font-weight-bolder text-center">$ {{addAmount recordsArr}}</h1>
+      <h1 class="font-weight-bolder text-center"
+          style="color:darkorange">$ {{addAmount recordsArr}}</h1>
     </div>
   </div>
   <ul class="list-group">

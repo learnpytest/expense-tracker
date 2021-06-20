@@ -1,13 +1,14 @@
 {{!-- 驗證失敗將錯誤項目提示使用者 --}}
 {{#if alertMessage}}
-<div class="alert alert-warning alert-dismissible fade show"
+<div class="alert alert-warning alert-dismissible fade show d-column justify-content-center align-items-center w-100 text-center"
      role="alert">
-  <strong>Hello {{firstName}}!</strong> You should check in on some of those fields below.
-  <ul>
+  <strong>Hello {{firstName}}! </strong>You should check in on some of those fields below.
+  <ul style="width:30%; margin:0 auto;">
     {{#each alertMessage}}
-    <li>{{this.param}}: {{this.msg}}</li>
+    <li class="text-left">{{this.param}}: {{this.msg}}</li>
     {{/each}}
   </ul>
+
   <button type="button"
           class="close"
           data-dismiss="alert"

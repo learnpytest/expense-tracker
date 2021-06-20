@@ -2,22 +2,21 @@
 {{#each recordsArr}}
 <li class="list-group-item">
   <div class="row">
-    <div class="col-2 col-lg-1">{{#if this.isCollab}}<i class="fas fa-lock-open"></i>{{else}}<i
-         class="fas fa-lock"></i>{{/if}}
+    <div class="col-2 col-lg-1  ml-3">{{#if this.isCollab}}<i class="fas fa-lock-open fa-lg"
+         style="color: goldenrod;"></i>{{else}}<i class="fas fa-lock fa-lg"
+         style="color: goldenrod;"></i>{{/if}}
     </div>
-    <div class="col-4 col-lg-2 mr-auto">
-      <small style="display: inline; vertical-align: middle;">
-        Created by:
-      </small><small>{{this.owner}}</small>
-    </div>
-    <div class="col-3 col-lg-2 mr-auto">
+    <div class="
+                    col-3
+                    col-lg-2
+                    mr-auto">
 
       <h2 style="display: inline; vertical-align:middle;">
 
         <i class="{{getCategoryElement
-            ../categoryArr
-            this.category
-            }}"></i>
+                    ../categoryArr
+                    this.category
+                    }}"></i>
       </h2>
       <h4 style="display: inline; vertical-align: middle;">
         {{this.name}}
@@ -26,15 +25,23 @@
       </h4>
     </div>
     <div class="col-1 col-lg-1 mr-auto">
-      <h5 style="display: inline; vertical-align: middle;">
-        {{this.amount}}
-      </h5>
+      <span style="display: inline; vertical-align: middle;">
+        <mark style="background-color: yellow;">${{this.amount}} </mark>
+      </span>
+    </div>
+    <div class="col-4 col-lg-2 mr-auto">
+      <span style="display: inline; vertical-align: middle;">
+
+      </span><span class="badge rounded-pill bg-secondary"
+            style="color: black;">
+        Owner: {{this.owner}}
+      </span>
     </div>
     {{!-- 刪除與修改 --}}
     <div class="col-auto">
       <a href="/records/{{this._id}}/edit"
          style="text-decoration:none">
-        <button class="btn btn-warning">修改</button>
+        <button class="btn btn-outline-warning">修改</button>
       </a>
 
       <form action="/records/{{this._id}}?_method=DELETE"
@@ -43,7 +50,7 @@
         {{!-- 這裡是刪除元件 --}}
         <!-- Button trigger modal -->
         <button type="button"
-                class="btn btn-danger"
+                class="btn btn-outline-danger"
                 data-toggle="modal"
                 data-target="#delete{{this._id}}">
           刪除
@@ -87,10 +94,11 @@
 {{!-- PART2 這裡是顯示錯誤訊息提式使用者 --}}
 
 {{!-- PART3 這裡是新增支出元件 --}}
-<li class="list-group-item text-center">
-  <a class="btn btn-success"
+<li class="list-group-item text-center mb-5">
+  <a class="btn btn btn-outline-success"
+     style="width: 50%;"
      href="/records/new">
-    <h1 class="text-center">新增支出</h1>
+    <span class="text-center">新增支出</span>
   </a>
 </li>
 {{!-- PART3 這裡是新增支出元件 --}}

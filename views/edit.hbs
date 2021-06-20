@@ -36,7 +36,7 @@
           <label for="category"
                  class="mr-5">類別*</label>
           <select id="category"
-                  class="form-control"
+                  class="form-control pr-5 py-0"
                   name="category"
                   required>
             {{> category}}
@@ -61,7 +61,7 @@
           <input type="checkbox"
                  name="isCollab"
                  id="isCollab"
-                 class="mr-5 form-control"
+                 class="mr-5 form-check-input"
                  {{#if
                  record.isCollab}}
                  checked
@@ -70,18 +70,6 @@
                  class="form-control ml-4"
                  placeholder="Collab"
                  disabled>
-        </div>
-        <div class="form-group form-inline">
-          <label for="footnote"
-                 class="mr-5">備註</label>
-          <textarea type="text"
-                    class="form-control"
-                    id="footnote"
-                    name="footnote"
-                    placeholder="備註 ..."
-                    rows="3">{{record.footnote}}</textarea>
-          <div class="valid-feedback"></div>
-          <div class="invalid-feedback"></div>
         </div>
         <div class="edit-form-submit-button text-center w-100">
           <button class="btn btn-lg btn-primary">修改</button>
