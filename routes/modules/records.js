@@ -77,11 +77,11 @@ router.put('/:id', inputValidationRules(), inputValidate, async (req, res) => {
 
 //新增一筆支出與送出表單
 router.post('/', inputValidationRules(), inputValidate, async (req, res, next) => {
-  const newDate = req.body
-  newDate.owner = req.session.user.email
-  newDate.isCollab = req.body.isCollab === 'on'
+  const newData = req.body
+  newData.owner = req.session.user.email
+  newData.isCollab = req.body.isCollab === 'on'
   try {
-    await Record.create(newDate)
+    await Record.create(newData)
     return res.redirect('/')
   } catch (err) {
     console.log(err)
