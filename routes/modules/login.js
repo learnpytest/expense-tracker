@@ -1,4 +1,6 @@
 const express = require('express')
+const bcrypt = require('bcryptjs')
+
 const router = express.Router()
 
 const User = require('../../models/User')
@@ -14,8 +16,9 @@ router.post('/', async (req, res) => {
   if ((!isExists)) {
     return res.render('login', { wrongAccountError })
   }
-  const isPasswordMatch = isExists.password === password
-  if ((!isPasswordMatch)) {
+  //compare bcrypted password
+  const isMatch = await bcrypt.compare(password, isExists.password)
+  if ((!isMatch)) {
     return res.render('login', { wrongAccountError })
   }
   req.session.user = isExists
