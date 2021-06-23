@@ -8,7 +8,7 @@ const ApiErrors = require('../../tools/apiErrors')
 
 //驗證
 const { check, validationResult } = require('express-validator')
-const { inputNameValid } = require('../../tools/isValid')
+const { inputValidationRules, inputValidate } = require('../../tools/isValid')
 //驗證
 
 //權限
@@ -59,15 +59,10 @@ router.get('/:id/edit', async (req, res, next) => {
     console.log(err)
     return next(new ApiErrors().internalHandling('Failed Editing '))
   }
-
 })
 
 //編輯一筆資料與送出表單
-router.put('/:id', [
-  check('name', 'Enter at least a word').trim().exists().isLength({ min: 1 }), check('date', 'Not valid format').exists().isDate({ format: "YYYY/MM/DD" }),
-  check('amount', 'Enter 0 or positive integer').exists().isNumeric().matches(/^([1-9]\d*)|0$/)
-  //For edit form input, for amount, Only integer input and >= 0, exclude exception of starting by 0 such as 01
-], inputNameValid, async (req, res) => {
+router.put('/:id', inputValidationRules(), inputValidate, async (req, res) => {
   const { id } = req.params
   const { isCollab } = req.body
   req.body.isCollab = isCollab === 'on'
@@ -81,11 +76,7 @@ router.put('/:id', [
 //編輯一筆資料與送出表單
 
 //新增一筆支出與送出表單
-router.post('/', [
-  check('name', 'Enter at least a word').trim().exists().isLength({ min: 1 }), check('date', 'Not valid format').exists().isDate({ format: "YYYY/MM/DD" }),
-  check('amount', 'Enter 0 or positive integer').exists().isNumeric().matches(/^([1-9]\d*)|0$/)
-  //For edit form input, for amount, Only integer input and >= 0, exclude exception of starting by 0 such as 01
-], inputNameValid, async (req, res, next) => {
+router.post('/', inputValidationRules(), inputValidate, async (req, res, next) => {
   const newDate = req.body
   newDate.owner = req.session.user.email
   newDate.isCollab = req.body.isCollab === 'on'
